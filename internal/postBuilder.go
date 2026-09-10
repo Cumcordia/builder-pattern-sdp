@@ -13,35 +13,38 @@ func newPostBuilder() *PostBuilder {
 	return &PostBuilder{}
 }
 
-func (g *PostBuilder) setCurl() IBuilder{
-	g.curl = Ccurl
-	return g
+func (p *PostBuilder) setCurl() IBuilder {
+	p.curl = defaultCurl
+	return p
 }
 
-func (g *PostBuilder) setURL() IBuilder {
-	g.url = Curl
-	return g
+func (p *PostBuilder) setURL() IBuilder {
+	p.url = defaultURL
+	return p
 }
 
-func (g *PostBuilder) setFlags() IBuilder{
-	g.flags = Cflag
-	return g
+func (p *PostBuilder) setData() IBuilder {
+	p.data = defaultData
+	return p
 }
 
-func (g *PostBuilder) setData() IBuilder{
-	g.data = Cdata
-	return g
+func (p *PostBuilder) setFlags() IBuilder {
+	p.flags = defaultFlags
+	return p
 }
 
-func (g *PostBuilder) getFinalURL() (URL, error) {
-
-	if g.curl == "" || g.url == "" || g.flags == "" || g.data == "" {
-		return URL{}, errors.New("URL is null")
+func (p *PostBuilder) getFinalResult() (Result, error) {
+	if p.url == "" {
+		return nil, errors.New("PostBuilder: url is not set")
 	}
-	return URL{
-		g.curl,
-		g.flags,
-		g.data,
-		g.url,
+	if p.data == "" {
+		return nil, errors.New("PostBuilder: data is required for POST")
+	}
+	return HTTPRequestObject{
+		Method: "POST",
+		URL:    p.url,
+		Headers: 
+			"Content-Type application/x-www-form-urlencoded",
+		Body: p.data,
 	}, nil
 }

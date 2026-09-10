@@ -10,16 +10,20 @@ func main() {
 	postBuilder := getBuilder("POST")
 
 	director := newDirector(getBuilderVar)
-	getUrl, err := director.buildGetURL()
-
-	fmt.Println(getUrl.curl, getUrl.url)
-
-	director.setBuilder(postBuilder)
-	postUrl, err := director.buildPostURL()
-
-	if err != nil{
+	getResult, err := director.buildGetRequest()
+	if err != nil {
 		log.Fatal(err)
 	}
+	if curl, ok := getResult.(CurlCommand); ok {
+		fmt.Println(curl.Command)
+	}
 
-	fmt.Println(postUrl.curl, postUrl.flags, postUrl.data, postUrl.url)
+	director.setBuilder(postBuilder)
+	postResult, err := director.buildPostRequest()
+	if err != nil {
+		log.Fatal(err)
+	}
+	if req, ok := postResult.(HTTPRequestObject); ok {
+		fmt.Printf("%s %s\nHeaders: %v\nBody: %s\n", req.Method, req.URL, req.Headers, req.Body)
+	}
 }

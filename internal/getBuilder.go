@@ -3,10 +3,8 @@ package main
 import "errors"
 
 type GetBuilder struct {
-	curl  string
-	url   string
-	data  string
-	flags string
+	curl string
+	url  string
 }
 
 func newGetBuilder() *GetBuilder {
@@ -14,12 +12,17 @@ func newGetBuilder() *GetBuilder {
 }
 
 func (g *GetBuilder) setCurl() IBuilder {
-	g.curl = Ccurl
-	return  g
+	g.curl = defaultCurl
+	return g
 }
 
 func (g *GetBuilder) setURL() IBuilder {
-	g.url = Curl
+	g.url = defaultURL
+	return g
+}
+
+// GET не использует data/flags — методы нужны только для соответствия интерфейсу.
+func (g *GetBuilder) setData() IBuilder {
 	return g
 }
 
@@ -27,17 +30,11 @@ func (g *GetBuilder) setFlags() IBuilder {
 	return g
 }
 
-func (g *GetBuilder) setData() IBuilder {
-	return g
-}
-
-func (g *GetBuilder) getFinalURL() (URL, error) {
+func (g *GetBuilder) getFinalResult() (Result, error) {
 	if g.curl == "" || g.url == "" {
-		return URL{}, errors.New("URL is null")
+		return nil, errors.New("GetBuilder: curl or url is not set")
 	}
-
-	return URL{
-		curl: g.curl,
-		url:  g.url,
+	return CurlCommand{
+		Command: g.curl + " " + g.url,
 	}, nil
 }

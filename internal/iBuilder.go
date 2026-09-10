@@ -5,24 +5,22 @@ type IBuilder interface {
 	setURL() IBuilder
 	setData() IBuilder
 	setFlags() IBuilder
-	getFinalURL() (URL, error)
+	getFinalResult() (Result, error)
 }
 
-const(
-	Ccurl = "curl"
-	Curl = "https://example.com"
-	Cflag = "-X POST -d"
-	Cdata = "data"
+const (
+	defaultCurl  = "curl"
+	defaultURL   = "https://example.com"
+	defaultFlags = "-X POST -d"
+	defaultData  = "data"
 )
 
 func getBuilder(builderType string) IBuilder {
 	if builderType == "GET" {
 		return newGetBuilder()
 	}
-
 	if builderType == "POST" {
 		return newPostBuilder()
 	}
-
 	return nil
 }
