@@ -11,6 +11,7 @@ func main() {
 
 	director := newDirector(getBuilderVar)
 	getResult, err := director.buildGetRequest()
+	
 	if err != nil {
 		log.Fatal(err)
 	}

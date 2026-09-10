@@ -9,7 +9,7 @@ type IBuilder interface {
 }
 
 const (
-	defaultCurl  = "curl"
+	defaultCurl   = "curl"
 	defaultURL   = "https://example.com"
 	defaultFlags = "-X POST -d"
 	defaultData  = "data"

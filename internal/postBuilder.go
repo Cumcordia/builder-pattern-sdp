@@ -35,16 +35,15 @@ func (p *PostBuilder) setFlags() IBuilder {
 
 func (p *PostBuilder) getFinalResult() (Result, error) {
 	if p.url == "" {
-		return nil, errors.New("PostBuilder: url is not set")
+		return nil, errors.New("url is not set")
 	}
 	if p.data == "" {
-		return nil, errors.New("PostBuilder: data is required for POST")
+		return nil, errors.New("data is required for POST")
 	}
 	return HTTPRequestObject{
-		Method: "POST",
-		URL:    p.url,
-		Headers: 
-			"Content-Type application/x-www-form-urlencoded",
-		Body: p.data,
+		Method:  "POST",
+		URL:     p.url,
+		Headers: "Content-Type application/x-www-form-urlencoded",
+		Body:    p.data,
 	}, nil
 }

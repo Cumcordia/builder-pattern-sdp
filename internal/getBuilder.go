@@ -21,7 +21,6 @@ func (g *GetBuilder) setURL() IBuilder {
 	return g
 }
 
-// GET не использует data/flags — методы нужны только для соответствия интерфейсу.
 func (g *GetBuilder) setData() IBuilder {
 	return g
 }
@@ -32,7 +31,7 @@ func (g *GetBuilder) setFlags() IBuilder {
 
 func (g *GetBuilder) getFinalResult() (Result, error) {
 	if g.curl == "" || g.url == "" {
-		return nil, errors.New("GetBuilder: curl or url is not set")
+		return nil, errors.New("curl or url is not set")
 	}
 	return CurlCommand{
 		Command: g.curl + " " + g.url,
