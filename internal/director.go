@@ -15,15 +15,9 @@ func (d *Director) setBuilder(b IBuilder) {
 }
 
 func (d *Director) buildGetURL() (URL, error) {
-	d.builder.setCurl()
-	d.builder.setURL()
-	return d.builder.getFinalURL()
+	return d.builder.setCurl().setURL().getFinalURL()
 }
 
 func (d *Director) buildPostURL() (URL, error) {
-	d.builder.setCurl()
-	d.builder.setFlags()
-	d.builder.setData()
-	d.builder.setURL()
-	return d.builder.getFinalURL()
+	return d.builder.setCurl().setFlags().setData().setURL().getFinalURL()
 }

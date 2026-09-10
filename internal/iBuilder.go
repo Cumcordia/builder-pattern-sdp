@@ -1,10 +1,10 @@
 package main
 
 type IBuilder interface {
-	setCurl()
-	setURL()
-	setData()
-	setFlags()
+	setCurl() IBuilder
+	setURL() IBuilder
+	setData() IBuilder
+	setFlags() IBuilder
 	getFinalURL() (URL, error)
 }
 

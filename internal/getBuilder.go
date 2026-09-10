@@ -13,17 +13,23 @@ func newGetBuilder() *GetBuilder {
 	return &GetBuilder{}
 }
 
-func (g *GetBuilder) setCurl() {
+func (g *GetBuilder) setCurl() IBuilder {
 	g.curl = "curl"
+	return  g
 }
 
-func (g *GetBuilder) setURL() {
+func (g *GetBuilder) setURL() IBuilder {
 	g.url = "https://example.com"
+	return g
 }
 
-func (g *GetBuilder) setFlags() {}
+func (g *GetBuilder) setFlags() IBuilder {
+	return g
+}
 
-func (g *GetBuilder) setData() {}
+func (g *GetBuilder) setData() IBuilder {
+	return g
+}
 
 func (g *GetBuilder) getFinalURL() (URL, error) {
 	if g.curl == "" || g.url == "" {

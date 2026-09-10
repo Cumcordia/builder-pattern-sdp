@@ -12,8 +12,7 @@ func main() {
 	director := newDirector(getBuilderVar)
 	getUrl, err := director.buildGetURL()
 
-	fmt.Print(getUrl.curl + " ")
-	fmt.Println(getUrl.url)
+	fmt.Println(getUrl.curl, getUrl.url)
 
 	director.setBuilder(postBuilder)
 	postUrl, err := director.buildPostURL()
@@ -22,8 +21,5 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Print(postUrl.curl  + " ")
-	fmt.Print(postUrl.flags  + " ")
-	fmt.Print(postUrl.data  + " ")
-	fmt.Println(postUrl.url)
+	fmt.Println(postUrl.curl, postUrl.flags, postUrl.data, postUrl.url)
 }

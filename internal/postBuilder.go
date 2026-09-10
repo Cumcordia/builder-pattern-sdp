@@ -13,20 +13,24 @@ func newPostBuilder() *PostBuilder {
 	return &PostBuilder{}
 }
 
-func (g *PostBuilder) setCurl() {
+func (g *PostBuilder) setCurl() IBuilder{
 	g.curl = "curl"
+	return g
 }
 
-func (g *PostBuilder) setURL() {
+func (g *PostBuilder) setURL() IBuilder {
 	g.url = "https://example.com"
+	return g
 }
 
-func (g *PostBuilder) setFlags() {
+func (g *PostBuilder) setFlags() IBuilder{
 	g.flags = "-X POST -d"
+	return g
 }
 
-func (g *PostBuilder) setData() {
+func (g *PostBuilder) setData() IBuilder{
 	g.data = "data"
+	return g
 }
 
 func (g *PostBuilder) getFinalURL() (URL, error) {
