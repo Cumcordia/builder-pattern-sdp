@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 type PostBuilder struct {
 	curl  string
 	url   string
@@ -27,11 +29,15 @@ func (g *PostBuilder) setData() {
 	g.data = "data"
 }
 
-func (g *PostBuilder) getFinalURL() URL {
-	return URL{
-		curl:  g.curl,
-		url:   g.url,
-		data:  g.data,
-		flags: g.flags,
+func (g *PostBuilder) getFinalURL() (URL, error) {
+
+	if g.curl == "" || g.url == "" || g.flags == "" || g.data == "" {
+		return URL{}, errors.New("URL is null")
 	}
+	return URL{
+		g.curl,
+		g.flags,
+		g.data,
+		g.url,
+	}, nil
 }

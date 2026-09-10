@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 type GetBuilder struct {
 	curl  string
 	url   string
@@ -23,9 +25,13 @@ func (g *GetBuilder) setFlags() {}
 
 func (g *GetBuilder) setData() {}
 
-func (g *GetBuilder) getFinalURL() URL {
+func (g *GetBuilder) getFinalURL() (URL, error) {
+	if g.curl == "" || g.url == "" {
+		return URL{}, errors.New("URL is null")
+	}
+
 	return URL{
 		curl: g.curl,
 		url:  g.url,
-	}
+	}, nil
 }

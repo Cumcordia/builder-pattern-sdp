@@ -1,19 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 func main() {
 	getBuilderVar := getBuilder("GET")
 	postBuilder := getBuilder("POST")
 
 	director := newDirector(getBuilderVar)
-	getUrl := director.buildGetURL()
+	getUrl, err := director.buildGetURL()
 
 	fmt.Print(getUrl.curl + " ")
 	fmt.Println(getUrl.url)
 
 	director.setBuilder(postBuilder)
-	postUrl := director.buildPostURL()
+	postUrl, err := director.buildPostURL()
+
+	if err != nil{
+		log.Fatal(err)
+	}
 
 	fmt.Print(postUrl.curl  + " ")
 	fmt.Print(postUrl.flags  + " ")

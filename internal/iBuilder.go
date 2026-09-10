@@ -5,7 +5,7 @@ type IBuilder interface {
 	setURL()
 	setData()
 	setFlags()
-	getFinalURL() URL
+	getFinalURL() (URL, error)
 }
 
 func getBuilder(builderType string) IBuilder {
