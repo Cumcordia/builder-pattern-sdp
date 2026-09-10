@@ -8,6 +8,13 @@ type IBuilder interface {
 	getFinalURL() (URL, error)
 }
 
+const(
+	Ccurl = "curl"
+	Curl = "https://example.com"
+	Cflag = "-X POST -d"
+	Cdata = "data"
+)
+
 func getBuilder(builderType string) IBuilder {
 	if builderType == "GET" {
 		return newGetBuilder()

@@ -14,12 +14,12 @@ func newGetBuilder() *GetBuilder {
 }
 
 func (g *GetBuilder) setCurl() IBuilder {
-	g.curl = "curl"
+	g.curl = Ccurl
 	return  g
 }
 
 func (g *GetBuilder) setURL() IBuilder {
-	g.url = "https://example.com"
+	g.url = Curl
 	return g
 }
 

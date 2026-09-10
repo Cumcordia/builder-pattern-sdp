@@ -14,22 +14,22 @@ func newPostBuilder() *PostBuilder {
 }
 
 func (g *PostBuilder) setCurl() IBuilder{
-	g.curl = "curl"
+	g.curl = Ccurl
 	return g
 }
 
 func (g *PostBuilder) setURL() IBuilder {
-	g.url = "https://example.com"
+	g.url = Curl
 	return g
 }
 
 func (g *PostBuilder) setFlags() IBuilder{
-	g.flags = "-X POST -d"
+	g.flags = Cflag
 	return g
 }
 
 func (g *PostBuilder) setData() IBuilder{
-	g.data = "data"
+	g.data = Cdata
 	return g
 }
 
